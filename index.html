@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immo te koop en te huur in Vlaanderen | Immoscoop</title>
+<!-- BrightBox redesign-mockup, juni 2026. Assets: live van immoscoop.be (logo, hero, renovatiefoto).
+     Brandkleuren benaderd vanuit logo/favicon; exacte hexcodes te bevestigen met hun styleguide. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#13284B;        /* donker hoofdkleur, te bevestigen */
+  --navy-deep:#0C1D38;
+  --coral:#FF5A48;       /* accent uit logo, te bevestigen */
+  --coral-dark:#E64634;
+  --sand:#F6F4EF;
+  --ink:#1B2430;
+  --grey:#5C6675;
+  --line:#E4E2DC;
+  --white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--white);line-height:1.55;overflow-x:clip}
+h1,h2,h3,h4{font-family:'Archivo',sans-serif;color:var(--navy);line-height:1.15}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;padding:14px 26px;border-radius:8px;border:none;cursor:pointer;transition:background .15s}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:var(--coral-dark)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-ghost:hover{border-color:#fff}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-deep)}
+.eyebrow{font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--coral)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:28px;height:68px}
+.nav img.logo{height:30px;width:auto}
+.nav-links{display:flex;gap:24px;font-size:15px;font-weight:500;color:var(--navy)}
+.nav-links a:hover{color:var(--coral)}
+.nav-spacer{flex:1}
+.nav .btn{padding:10px 18px;font-size:14px}
+
+/* hero */
+.hero{position:relative;background:var(--navy-deep)}
+.hero-bg{position:absolute;inset:0;background:url('https://www.immoscoop.be/_next/static/media/hero-bg-reno-01.d6c2244a.png') center/cover no-repeat;opacity:.45}
+.hero-inner{position:relative;padding:clamp(48px,8vw,96px) 0 clamp(56px,8vw,104px)}
+.hero h1{color:#fff;font-size:clamp(30px,4.5vw,52px);max-width:640px}
+.hero p.sub{color:rgba(255,255,255,.85);font-size:clamp(16px,2vw,19px);max-width:560px;margin:14px 0 28px}
+.search-card{background:#fff;border-radius:12px;padding:18px;max-width:860px;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tab{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;padding:9px 20px;border-radius:7px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.search-row{display:grid;grid-template-columns:2fr 1.2fr 1.2fr auto;gap:10px}
+.search-row input,.search-row select{padding:13px 14px;border:1.5px solid var(--line);border-radius:8px;font:inherit;font-size:15px;color:var(--ink);width:100%}
+.hero-alt{margin-top:18px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.hero-alt a{color:#fff;font-weight:600;font-size:15px;border-bottom:2px solid var(--coral);padding-bottom:2px}
+
+/* usp bar */
+.uspbar{background:var(--sand);border-bottom:1px solid var(--line)}
+.uspbar .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:20px;padding-bottom:20px}
+.usp{display:flex;gap:12px;align-items:center;font-size:14.5px;font-weight:500;color:var(--navy)}
+.usp svg{flex:0 0 26px}
+
+/* dual path */
+.paths{padding:clamp(48px,7vw,84px) 0}
+.paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+.path{border:1.5px solid var(--line);border-radius:14px;padding:34px 32px;display:flex;flex-direction:column;gap:14px}
+.path.highlight{background:var(--navy);border-color:var(--navy)}
+.path.highlight h3,.path.highlight p{color:#fff}
+.path.highlight p{opacity:.85}
+.path h3{font-size:24px}
+.path p{color:var(--grey);font-size:15.5px}
+.path .btn{align-self:flex-start;margin-top:6px}
+
+/* schatting highlight */
+.schatting{background:var(--sand);padding:clamp(48px,7vw,84px) 0}
+.schatting-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.schatting h2{font-size:clamp(26px,3.4vw,38px);margin:10px 0 16px}
+.schatting p{color:var(--grey);font-size:16px;margin-bottom:12px}
+.check{display:flex;gap:10px;align-items:flex-start;margin:10px 0;font-size:15.5px;color:var(--ink)}
+.check svg{flex:0 0 20px;margin-top:3px}
+.schatting img{border-radius:14px;width:100%;box-shadow:0 14px 40px rgba(19,40,75,.15)}
+
+/* only */
+.only{padding:clamp(48px,7vw,84px) 0}
+.only-card{background:var(--navy-deep);border-radius:16px;padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.only h2{color:#fff;font-size:clamp(24px,3vw,34px);margin:10px 0 14px}
+.only p{color:rgba(255,255,255,.85);font-size:16px}
+.only .stat{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);color:var(--coral);line-height:1}
+.only .statlabel{color:rgba(255,255,255,.8);font-size:14.5px;margin-top:8px}
+
+/* steden */
+.steden{padding:clamp(48px,7vw,84px) 0;border-top:1px solid var(--line)}
+.steden-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.stad{border:1.5px solid var(--line);border-radius:10px;padding:16px 18px;font-weight:600;font-size:15px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;transition:border-color .15s}
+.stad:hover{border-color:var(--coral)}
+.stad span.count{color:var(--grey);font-weight:500;font-size:13.5px}
+
+/* makelaars */
+.makelaars{background:var(--sand);padding:clamp(40px,6vw,64px) 0}
+.makelaars .inner{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.makelaars h2{font-size:clamp(22px,2.8vw,30px);max-width:520px}
+.makelaars p{color:var(--grey);margin-top:8px;max-width:520px}
+
+/* footer */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.75);padding:48px 0 32px;font-size:14.5px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:36px}
+footer h4{color:#fff;font-size:15px;margin-bottom:14px}
+footer a{display:block;margin:8px 0}
+footer a:hover{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media(max-width:920px){
+  .search-row{grid-template-columns:1fr 1fr}
+  .paths-grid,.schatting-grid,.only-card{grid-template-columns:1fr}
+  .steden-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .uspbar .wrap{grid-template-columns:1fr;gap:10px}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .search-row{grid-template-columns:1fr}
+  .steden-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#"><img class="logo" src="https://www.immoscoop.be/_next/static/media/immoscoop.65de57e6.svg" alt="Immoscoop"></a>
+    <nav class="nav-links">
+      <a href="#kopen">Kopen</a>
+      <a href="#kopen">Huren</a>
+      <a href="#schatting">Gratis schatting</a>
+      <a href="#only">Immoscoop Only</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <a class="btn btn-coral" href="#schatting">Schat mijn woning</a>
+  </div>
+</header>
+
+<section class="hero" id="kopen">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+    <h1>Vind je thuis vóór de rest van Vlaanderen.</h1>
+    <p class="sub">Het vastgoedplatform van 400 Vlaamse makelaars. Met panden die je nergens anders vindt, minstens 3 dagen exclusief.</p>
+    <div class="search-card">
+      <div class="tabs">
+        <button class="tab active" onclick="setTab(this)">Te koop</button>
+        <button class="tab" onclick="setTab(this)">Te huur</button>
+      </div>
+      <div class="search-row">
+        <input type="text" placeholder="Gemeente of postcode" aria-label="Locatie">
+        <select aria-label="Type"><option>Type woning</option><option>Huis</option><option>Appartement</option><option>Grond</option></select>
+        <select aria-label="Budget"><option>Max. prijs</option><option>€ 250.000</option><option>€ 400.000</option><option>€ 600.000</option></select>
+        <button class="btn btn-navy">Zoeken</button>
+      </div>
+    </div>
+    <div class="hero-alt">
+      <a href="#schatting">Verkopen? Ontdek eerst wat je woning waard is</a>
+    </div>
+  </div>
+</section>
+
+<div class="uspbar">
+  <div class="wrap">
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+      Exclusief aanbod: Immoscoop Only, 3 dagen vóór alle andere sites
+    </div>
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/></svg>
+      60.000+ panden per maand, rechtstreeks van de makelaar
+    </div>
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+      Gratis schatting, budget- en renovatiesimulator in één
+    </div>
+  </div>
+</div>
+
+<section class="paths">
+  <div class="wrap">
+    <span class="eyebrow">Waarvoor kom je?</span>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);margin-top:10px">Twee snelle startpunten</h2>
+    <div class="paths-grid">
+      <div class="path">
+        <h3>Ik zoek een woning</h3>
+        <p>Doorzoek het volledige aanbod van 400 makelaars, stel je alert in en ontdek Immoscoop Only-panden vóór iedereen.</p>
+        <a class="btn btn-navy" href="#kopen">Start je zoektocht</a>
+      </div>
+      <div class="path highlight">
+        <h3>Ik wil verkopen of verhuren</h3>
+        <p>Begin met een gratis schatting op basis van echte marktdata. Daarna brengt een erkende makelaar uit je buurt je pand bij duizenden zoekers.</p>
+        <a class="btn btn-coral" href="#schatting">Schat mijn woning gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="schatting" id="schatting">
+  <div class="wrap schatting-grid">
+    <div>
+      <span class="eyebrow">Gratis schatting</span>
+      <h2>Wat is jouw woning waard? Je weet het in 2 minuten.</h2>
+      <p>Vul je adres en woningkenmerken in. Je krijgt meteen een waarde-indicatie, gebouwd op de verkoopdata van 400 Vlaamse makelaars.</p>
+      <div class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2.5" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>100% gratis en vrijblijvend</div>
+      <div class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2.5" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>Gebaseerd op echte verkoopprijzen in jouw buurt</div>
+      <div class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A48" stroke-width="2.5" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>Inclusief renovatiebudget om je EPC te verbeteren</div>
+      <a class="btn btn-coral" href="https://www.immoscoop.be/gratis-schatting" style="margin-top:10px">Start de gratis schatting</a>
+    </div>
+    <img src="https://www.immoscoop.be/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Frenovation.f65288f6.png&w=640&q=75" alt="Renovatiesimulator van Immoscoop" loading="lazy">
+  </div>
+</section>
+
+<section class="only" id="only">
+  <div class="wrap">
+    <div class="only-card">
+      <div>
+        <span class="eyebrow">Immoscoop Only</span>
+        <h2>Panden die je nergens anders vindt</h2>
+        <p>Immoscoop Only-panden staan minstens 3 dagen exclusief op immoscoop.be en de site van de makelaar. Wie hier zoekt, is de rest dus altijd een stap voor. Stel je alert in en wees er als eerste bij.</p>
+        <a class="btn btn-coral" href="#" style="margin-top:18px">Bekijk Only-panden</a>
+      </div>
+      <div>
+        <div class="stat">3 dagen</div>
+        <div class="statlabel">exclusief op Immoscoop, vóór elke andere vastgoedsite</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steden">
+  <div class="wrap">
+    <span class="eyebrow">Populaire regio's</span>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);margin-top:10px">Immo te koop per stad</h2>
+    <div class="steden-grid">
+      <a class="stad" href="#">Antwerpen <span class="count">→</span></a>
+      <a class="stad" href="#">Gent <span class="count">→</span></a>
+      <a class="stad" href="#">Leuven <span class="count">→</span></a>
+      <a class="stad" href="#">Knokke <span class="count">→</span></a>
+      <a class="stad" href="#">Hasselt <span class="count">→</span></a>
+      <a class="stad" href="#">Brugge <span class="count">→</span></a>
+      <a class="stad" href="#">Mechelen <span class="count">→</span></a>
+      <a class="stad" href="#">Oostende <span class="count">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="makelaars">
+  <div class="wrap inner">
+    <div>
+      <span class="eyebrow">Voor makelaars</span>
+      <h2>Het platform van en voor makelaars. Geen mediagroep, wel je eigen data.</h2>
+      <p>Sluit aan bij de coöperatie van 400 Vlaamse makelaars en bereik duizenden kopers en verkopers, mét exclusiviteit voor je aanbod.</p>
+    </div>
+    <a class="btn btn-navy" href="https://portal.immoscoop.be/">Word lid als makelaar</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="https://www.immoscoop.be/_next/static/media/immoscoop.65de57e6.svg" alt="Immoscoop" style="height:28px;filter:brightness(0) invert(1);margin-bottom:14px">
+        <p>Het vastgoedplatform van en voor Vlaamse makelaars. Sinds 2016.</p>
+      </div>
+      <div>
+        <h4>Zoeken</h4>
+        <a href="#">Te koop</a><a href="#">Te huur</a><a href="#">Immoscoop Only</a><a href="#">Alle gemeenten</a>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <a href="#schatting">Gratis schatting</a><a href="#">Budgetsimulator</a><a href="#">Renovatiesimulator</a><a href="#">App downloaden</a>
+      </div>
+      <div>
+        <h4>Immoscoop</h4>
+        <a href="#">Over ons</a><a href="#">Voor makelaars</a><a href="#">Blog</a><a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Immoscoop</span>
+      <span>Algemene voorwaarden · Juridische info</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function setTab(el){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+</script>
+</body>
+</html>
