@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Immoweb redesign: homepage met verkoperspad (BrightBox pitch)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#133DBD;        /* echte Immoweb merkleur (msapplication-TileColor) */
+  --blue-dark:#0E2E8F;
+  --blue-soft:#EAF0FF;
+  --ink:#1A2233;
+  --muted:#5A6478;
+  --line:#E3E8F2;
+  --bg:#FFFFFF;
+  --accent:#FF5A36;      /* conversie-accent voor het verkoperspad */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* utility bar */
+.util{background:var(--blue-dark);color:#fff;font-size:13px}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;height:34px}
+.util span{opacity:.9}
+.util .langs a{margin-left:12px;opacity:.75}
+.util .langs a.active{opacity:1;font-weight:600;border-bottom:2px solid #fff}
+
+/* header */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:50}
+header .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.logo img{height:30px;width:auto}
+nav{display:flex;gap:22px;font-size:15px;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--blue)}
+.hdr-cta{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn{display:inline-block;padding:11px 20px;border-radius:6px;font-weight:600;font-size:15px;cursor:pointer;border:none}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-dark)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:#fff}
+
+/* hero */
+/* stock: vervang door echte foto (achtergrond hero) */
+.hero{background:linear-gradient(100deg,rgba(14,46,143,.93) 0%,rgba(19,61,189,.80) 55%,rgba(14,46,143,.55) 100%),url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;color:#fff;padding:56px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .85fr;gap:40px;align-items:start}
+.hero h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.5px}
+.hero p.sub{margin:14px 0 26px;font-size:17px;opacity:.92;max-width:46ch}
+
+/* zoekkaart koperskant */
+.search-card{background:#fff;border-radius:10px;padding:18px;color:var(--ink);box-shadow:0 10px 30px rgba(8,20,60,.25)}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tabs button{flex:0 0 auto;padding:9px 18px;border-radius:6px;border:none;background:var(--blue-soft);color:var(--blue);font-weight:600;font-size:14px;cursor:pointer}
+.tabs button.active{background:var(--blue);color:#fff}
+.search-row{display:flex;gap:10px}
+.search-row select,.search-row input{flex:1;padding:13px 14px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;font-family:inherit}
+.search-row .btn{flex:0 0 auto}
+
+/* verkoperspaneel: dÃ© toevoeging */
+.sell-panel{background:#fff;border-radius:10px;padding:26px;color:var(--ink);box-shadow:0 10px 30px rgba(8,20,60,.25);border-top:4px solid var(--accent);overflow:hidden}
+.sell-panel .sell-img{width:calc(100% + 52px);margin:-26px -26px 18px;height:150px;object-fit:cover}
+.sell-panel .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sell-panel h2{font-size:22px;margin:6px 0 8px;font-weight:800}
+.sell-panel p{font-size:14.5px;color:var(--muted);margin-bottom:16px}
+.sell-panel .row{display:flex;gap:10px}
+.sell-panel input{flex:1;padding:12px 14px;border:1.5px solid var(--line);border-radius:6px;font-size:15px;font-family:inherit}
+.sell-panel small{display:block;margin-top:10px;color:var(--muted);font-size:12.5px}
+
+/* USP bar */
+.usps{border-bottom:1px solid var(--line);background:#fff}
+.usps .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:22px 24px}
+.usp{display:flex;gap:12px;align-items:center}
+.usp svg{flex:0 0 26px}
+.usp b{display:block;font-size:15px}
+.usp span{font-size:13.5px;color:var(--muted)}
+
+/* keuzeblokken */
+.section{padding:56px 0}
+.section h2{font-size:28px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px}
+.section p.lead{color:var(--muted);margin-bottom:28px;max-width:60ch}
+.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.path{border:1.5px solid var(--line);border-radius:10px;padding:22px;transition:border-color .15s}
+.path:hover{border-color:var(--blue)}
+.path svg{margin-bottom:12px}
+.path b{display:block;font-size:16px;margin-bottom:4px}
+.path span{font-size:14px;color:var(--muted)}
+.path .go{display:inline-block;margin-top:12px;color:var(--blue);font-weight:600;font-size:14px}
+
+/* verkopersfunnel */
+.sellflow{background:var(--blue-soft)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.step{background:#fff;border-radius:10px;padding:24px;border:1.5px solid transparent}
+.step .num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.step b{display:block;margin-bottom:4px}
+.step span{font-size:14px;color:var(--muted)}
+.sellflow .cta-line{margin-top:26px;display:flex;gap:14px;align-items:center}
+
+/* trust */
+.trust .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px}
+.trust .gallery img{width:100%;height:190px;object-fit:cover;border-radius:10px;display:block}
+.trust .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.trust ul{list-style:none}
+.trust li{display:flex;gap:12px;margin-bottom:14px;font-size:15px}
+.trust li svg{flex:0 0 22px;margin-top:2px}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{font-weight:600;cursor:pointer;font-size:16px;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--blue);font-weight:700}
+details[open] summary::after{content:"â€“"}
+details p{margin-top:10px;color:var(--muted);font-size:14.5px;max-width:75ch}
+
+/* footer */
+footer{background:var(--ink);color:#C7CDDC;font-size:14px;padding:44px 0 28px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:28px}
+footer b{color:#fff;display:block;margin-bottom:10px}
+footer a{display:block;margin-bottom:7px;opacity:.85}
+footer .base{border-top:1px solid #2A3349;padding-top:18px;display:flex;justify-content:space-between;font-size:13px;opacity:.7}
+
+@media(max-width:920px){
+  .hero .wrap{grid-template-columns:1fr}
+  .usps .wrap,.paths,.steps{grid-template-columns:1fr 1fr}
+  .trust .cols{grid-template-columns:1fr}
+  .trust .gallery{grid-template-columns:1fr 1fr}
+  .trust .gallery img:last-child{display:none}
+  footer .cols{grid-template-columns:1fr 1fr}
+  nav{display:none}
+  .hero h1{font-size:31px}
+}
+@media(max-width:560px){
+  .usps .wrap,.paths,.steps{grid-template-columns:1fr}
+  .trust .gallery{grid-template-columns:1fr}
+  .trust .gallery img:last-child{display:block}
+  .search-row{flex-direction:column}
+  .sell-panel .row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="util">
+  <div class="wrap">
+    <span>De grootste vastgoedsite van BelgiÃ«</span>
+    <span class="langs"><a href="#">FR</a><a href="#" class="active">NL</a><a href="#">EN</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#"><img src="https://assets.immoweb.be/102465/images/logos/brand-logo.svg" alt="Immoweb"></a>
+    <nav>
+      <a href="#">Te koop</a>
+      <a href="#">Te huur</a>
+      <a href="#">Nieuwbouw</a>
+      <a href="#verkopen">Verkopen</a>
+      <a href="#">Professionals</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn btn-ghost" href="#">Aanmelden</a>
+      <a class="btn btn-accent" href="#verkopen">Verkoop je woning</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Vind je volgende thuis.<br>Of verkoop je huidige, slim.</h1>
+      <p class="sub">Zoek in heel BelgiÃ«, in drie talen. En als je verkoopt: start met een gratis online schatting op basis van echte marktdata.</p>
+      <div class="search-card">
+        <div class="tabs">
+          <button class="active" type="button">Kopen</button>
+          <button type="button">Huren</button>
+          <button type="button">Nieuwbouw</button>
+        </div>
+        <div class="search-row">
+          <select aria-label="Type woning">
+            <option>Huis en appartement</option>
+            <option>Huis</option>
+            <option>Appartement</option>
+            <option>Bouwgrond</option>
+          </select>
+          <input type="text" placeholder="Gemeente of postcode">
+          <button class="btn btn-primary" type="button">Zoeken</button>
+        </div>
+      </div>
+    </div>
+    <aside class="sell-panel" id="verkopen">
+      <!-- stock: vervang door echte foto -->
+      <img class="sell-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Lichtrijk interieur van een woning, klaar voor verkoop">
+      <span class="eyebrow">Voor verkopers</span>
+      <h2>Wat is jouw woning waard?</h2>
+      <p>Gratis online schatting op basis van werkelijke verkoopdata uit jouw buurt. Daarna kies je zelf: verkopen met een makelaar of op eigen houtje.</p>
+      <div class="row">
+        <input type="text" placeholder="Adres van je woning">
+        <button class="btn btn-accent" type="button">Schat mijn woning</button>
+      </div>
+      <small>Vrijblijvend. Je gegevens worden niet doorverkocht.</small>
+    </aside>
+  </div>
+</section>
+
+<div class="usps">
+  <div class="wrap">
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/></svg>
+      <div><b>Het grootste aanbod van BelgiÃ«</b><span>Huizen, appartementen, nieuwbouw en gronden</span></div>
+    </div>
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7c2-2 5-2 7 0 2-2 5-2 7 0"/><path d="M5 14c2-2 5-2 7 0 2-2 5-2 7 0"/></svg>
+      <div><b>Gratis online schatting</b><span>Gebaseerd op echte transacties in je buurt</span></div>
+    </div>
+    <div class="usp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+      <div><b>In drie talen</b><span>Bereik kopers in heel BelgiÃ«, NL, FR en EN</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Waarvoor kom je vandaag?</h2>
+    <p class="lead">Vier duidelijke startpunten. Geen omwegen.</p>
+    <div class="paths">
+      <a class="path" href="#">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <b>Ik wil kopen</b>
+        <span>Zoek op kaart, gemeente of budget in het volledige aanbod.</span>
+        <span class="go">Start je zoektocht</span>
+      </a>
+      <a class="path" href="#">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+        <b>Ik wil huren</b>
+        <span>Appartementen, huizen en studentenkoten, dagelijks aangevuld.</span>
+        <span class="go">Bekijk huuraanbod</span>
+      </a>
+      <a class="path" href="#verkopen">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FF5A36" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+        <b>Ik wil verkopen</b>
+        <span>Start met een gratis schatting en kies daarna je verkoopformule.</span>
+        <span class="go">Schat mijn woning</span>
+      </a>
+      <a class="path" href="#">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <b>Ik ben professional</b>
+        <span>Makelaar, notaris of ontwikkelaar: bereik miljoenen woningzoekers.</span>
+        <span class="go">Ontdek de pro-formules</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section sellflow">
+  <div class="wrap">
+    <h2>Je woning verkopen in drie stappen</h2>
+    <p class="lead">Van schatting tot zoekertje, zonder verrassingen.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <b>Schat je woning gratis</b>
+        <span>Vul je adres in en krijg meteen een prijsindicatie op basis van echte verkoopdata uit jouw buurt.</span>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <b>Kies je verkoopformule</b>
+        <span>Zelf verkopen met een zoekertje, of begeleid door een erkende makelaar uit ons netwerk. Jij beslist.</span>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <b>Publiceer voor heel BelgiÃ«</b>
+        <span>Je woning staat in drie talen voor het grootste kopersbereik van het land.</span>
+      </div>
+    </div>
+    <div class="cta-line">
+      <a class="btn btn-accent" href="#verkopen">Start met je gratis schatting</a>
+      <a class="btn btn-ghost" href="#">Vergelijk de verkoopformules</a>
+    </div>
+  </div>
+</section>
+
+<section class="section trust">
+  <div class="wrap">
+    <div class="gallery">
+      <!-- stock: vervang door echte foto -->
+      <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1600&q=80" alt="Woning met tuin, recent verkocht">
+      <!-- stock: vervang door echte foto -->
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" alt="Moderne gezinswoning">
+      <!-- stock: vervang door echte foto -->
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80" alt="Sfeervolle woonkamer">
+    </div>
+    <div class="cols">
+    <div>
+      <h2>Waarom verkopers voor Immoweb kiezen</h2>
+      <ul>
+        <li>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Het grootste kopersbereik van BelgiÃ«: wie hier niet staat, mist kopers.</span>
+        </li>
+        <li>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Schattingen op basis van werkelijke transacties, niet op buikgevoel.</span>
+        </li>
+        <li>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Partners voor je volledige traject: hypotheek via Belfius, brandverzekering, notarissen.</span>
+        </li>
+        <li>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#133DBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Fraudepreventie en duidelijke rankingregels: je weet waar je aan toe bent.</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="font-size:22px">Veelgestelde vragen van verkopers</h2>
+      <details>
+        <summary>Wat kost een zoekertje op Immoweb?</summary>
+        <p>De prijs hangt af van de formule en looptijd die je kiest. Je ziet alle tarieven voor je publiceert, zonder verborgen kosten.</p>
+      </details>
+      <details>
+        <summary>Hoe werkt de gratis schatting?</summary>
+        <p>Je vult je adres en enkele kenmerken in. Het model vergelijkt met werkelijke verkopen in je buurt en geeft een prijsvork. Vrijblijvend en zonder verplichting.</p>
+      </details>
+      <details>
+        <summary>Kan ik verkopen zonder makelaar?</summary>
+        <p>Ja. Je plaatst zelf een zoekertje en beheert de contacten. Wil je toch begeleiding, dan verbinden we je met erkende makelaars in je regio.</p>
+      </details>
+      <details>
+        <summary>In welke talen verschijnt mijn zoekertje?</summary>
+        <p>Je zoekertje is zichtbaar in het Nederlands, Frans en Engels, voor het volledige Belgische kopersbereik.</p>
+      </details>
+    </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b>Immoweb</b>
+        <p style="max-width:36ch;opacity:.85">De grootste vastgoedsite van BelgiÃ«, sinds 1996. Onderdeel van AVIV Group (Axel Springer).</p>
+      </div>
+      <div>
+        <b>Kopen en huren</b>
+        <a href="#">Huis te koop</a>
+        <a href="#">Appartement te koop</a>
+        <a href="#">Huis te huur</a>
+        <a href="#">Appartement te huur</a>
+      </div>
+      <div>
+        <b>Verkopen</b>
+        <a href="#verkopen">Online schatting</a>
+        <a href="#">Zoekertje plaatsen</a>
+        <a href="#">Verkoopadvies</a>
+        <a href="#">Vind een makelaar</a>
+      </div>
+      <div>
+        <b>Hulp</b>
+        <a href="#">Veelgestelde vragen</a>
+        <a href="#">Fraude melden</a>
+        <a href="#">Contact</a>
+        <a href="#">Rankingregels</a>
+      </div>
+    </div>
+    <div class="base">
+      <span>Immoweb SA Â© 2026. Alle rechten voorbehouden.</span>
+      <span>Gebruiksvoorwaarden Â· Privacy Â· Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
